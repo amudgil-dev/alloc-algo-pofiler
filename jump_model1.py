@@ -3,6 +3,12 @@ import heapq
 from collections import deque, namedtuple
 
 
+"""
+jump_model1 context:
+
+"""
+
+
 # model job characteristics with named tuple
 Job = namedtuple(
     "Job",
@@ -30,6 +36,8 @@ class JobMarketSim:
         self.time = 0  # to simulatee time units passing
         self.servers = [0] * n  # keep track of the time a server is occupied untill
         self.queue = deque()
+
+        # event scheduling & time management- allows sim to jump to next event rather than incrementing time step by step
         self.events = []
 
         # monitoring stats
