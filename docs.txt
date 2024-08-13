@@ -42,3 +42,8 @@ server allocation scheme:
 
     upon job arrival if atleast 1 server is available an allocation scheme is used to determine the number of available servers allocated to the job
     allocated server will remain occupied as long as the job executes
+
+qs for arpan:
+- how to try the other greedy scheme
+- how the sublinear speed up function is set & how to incorporate it into my model
+- why graphs appear different to final results

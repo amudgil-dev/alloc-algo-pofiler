@@ -1,6 +1,8 @@
-from model1 import JobMarketSim
+from jump_model1 import JobMarketSim
 from db_manager import db_dump, db_clear
 import time
+from jump_model1_graphs import plot_jump_model1_results
+from pprint import pprint
 
 
 myparams = {"n": 100, "beta": 0.5, "alpha": 0.5, "d_n": 5, "max_jobs": 5000}
@@ -16,7 +18,13 @@ print(f"Jobs in queue: {len(sim.queue)}")
 print(f"Average wait time: {sim.total_wait_time / sim.jobs_processed:.2f}")
 print(f"Average processing time: {sim.total_processing_time / sim.jobs_processed:.2f}")
 
+print("---------")
+pprint(len(results))
 
-# db_clear()
+
+# plotting results
+plot_jump_model1_results(results, sim)
+
+db_clear()
 db_dump(myparams, results)
 print("added to db")

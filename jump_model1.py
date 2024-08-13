@@ -5,6 +5,8 @@ from collections import deque, namedtuple
 
 """
 jump_model1 context:
+- self.events is a minheap for event scheduling & time management: allows sim to jump to next event rather than incrementing time step by step
+- minheap removes event with earliest time and model processes it
 
 """
 
@@ -36,9 +38,7 @@ class JobMarketSim:
         self.time = 0  # to simulatee time units passing
         self.servers = [0] * n  # keep track of the time a server is occupied untill
         self.queue = deque()
-
-        # event scheduling & time management- allows sim to jump to next event rather than incrementing time step by step
-        self.events = []
+        self.events = []  # minheap for event scheduling
 
         # monitoring stats
         self.jobs_arrived = 0
@@ -112,6 +112,12 @@ class JobMarketSim:
 
         stats = []
 
+        """
+        main sim loop for processing events
+        - for arrivals: process arrival then schedule next. When job starts processing its completion is scheduled
+        - for finish: process next job in queue
+
+        """
         while self.events and self.jobs_arrived < self.max_jobs:
             self.time, event_type = heapq.heappop(self.events)
 
@@ -133,7 +139,7 @@ class JobMarketSim:
 
             # collect stats every 100000 jobs
             if (
-                self.jobs_arrived % 100000 == 0 and self.jobs_processed > 0
+                self.jobs_arrived % 100 == 0 and self.jobs_processed > 0
             ):  # catch divide by 0 case
                 busy_servers = sum(
                     1 for server_time in self.servers if server_time > self.time
