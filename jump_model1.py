@@ -1,6 +1,7 @@
 import numpy as np
 import heapq
 from collections import deque, namedtuple
+import math
 
 
 """
@@ -46,6 +47,28 @@ class JobMarketSim:
         self.total_wait_time = 0
         self.total_processing_time = 0
 
+    # constructor with max jobs as a function of n
+    def __init__(self, n, beta, alpha, d_n):
+        self.n = n  # number of servers
+        self.beta = beta
+        self.alpha = alpha
+        self.d_n = d_n  # max degree of parellelism
+        self.max_jobs = n * 100
+
+        # calculate arrival rate of jobs
+        self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
+
+        self.time = 0  # to simulatee time units passing
+        self.servers = [0] * n  # keep track of the time a server is occupied untill
+        self.queue = deque()
+        self.events = []  # minheap for event scheduling
+
+        # monitoring stats
+        self.jobs_arrived = 0
+        self.jobs_processed = 0
+        self.total_wait_time = 0
+        self.total_processing_time = 0
+
     def generate_interarrival_time(self):
         return np.random.exponential(1 / self.arrival_rate)
 
@@ -57,6 +80,7 @@ class JobMarketSim:
     """
 
     def get_speedup_factor(self, allocated_servers):
+        # return math.sqrt(allocated_servers)  # sub-linear
         return allocated_servers  # linear
 
     """
@@ -137,25 +161,25 @@ class JobMarketSim:
                 if self.queue:
                     self.process_job(self.queue.popleft())
 
-            # collect stats every 100000 jobs
-            if (
-                self.jobs_arrived % 100 == 0 and self.jobs_processed > 0
-            ):  # catch divide by 0 case
-                busy_servers = sum(
-                    1 for server_time in self.servers if server_time > self.time
-                )
+            # collect stats every 10 jobs
+            # if (
+            #     self.jobs_arrived % 10 == 0 and self.jobs_processed > 0
+            # ):  # catch divide by 0 case
+            # busy_servers = sum(
+            #     1 for server_time in self.servers if server_time > self.time
+            # )
 
-                stats.append(
-                    {
-                        "jobs": self.jobs_arrived,
-                        "time": self.time,
-                        "queue_length": len(self.queue),
-                        "jobs_processed": self.jobs_processed,
-                        "busy_servers": busy_servers,
-                        "ave_wait_time": self.total_wait_time / self.jobs_processed,
-                        "ave_processing_time": self.total_processing_time
-                        / self.jobs_processed,
-                    }
-                )
+            # stats.append(
+            #     {
+            #         "jobs": self.jobs_arrived,
+            #         "time": self.time,
+            #         "queue_length": len(self.queue),
+            #         "jobs_processed": self.jobs_processed,
+            #         "busy_servers": busy_servers,
+            #         "ave_wait_time": self.total_wait_time / self.jobs_processed,
+            #         "ave_processing_time": self.total_processing_time
+            #         / self.jobs_processed,
+            #     }
+            # )
 
         return stats

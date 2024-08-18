@@ -43,7 +43,32 @@ server allocation scheme:
     upon job arrival if atleast 1 server is available an allocation scheme is used to determine the number of available servers allocated to the job
     allocated server will remain occupied as long as the job executes
 
+
+p* server allocation scheme:
+
+
 qs for arpan:
 - how to try the other greedy scheme
 - how the sublinear speed up function is set & how to incorporate it into my model
 - why graphs appear different to final results
+
+
+
+plots;
+- expect: wait time = near 0, ave processing time = 1/d_n (0.1) if d_n is asymptotic, converges to 0
+
+- repeat for different values of n: 10-2000: 10, 100, 500, 1000, 1500, 2000
+- compute ave wait & ave processing time
+
+- number of jobs should be large, as a function of n. max jobs = 100n
+
+plot 1: ave wait time as a function of n
+- increasing n on x axis, ave wait time of y axis.
+- should converge
+
+plot 2: ave processing time as a function of n
+- should converge
+
+plot 3: ave wait & processing as a function of n 𝜆, or a function of 𝛽
+- normalised arrival rate by size of system- keep n fixed, vary 𝜆 by changing 𝛽 0.1,0.2...0.9
+

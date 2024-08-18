@@ -2,6 +2,26 @@ import matplotlib.pyplot as plt
 import time
 
 
+# Function to create a single subplot
+def create_subplot(ax, data, title, xlabel, ylabel):
+    ax.plot(list(data.keys()), list(data.values()), marker="o")
+    ax.set_title(title)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.grid(True)
+
+
+def create_plot(data, title, xlabel, ylabel, filename):
+    plt.figure(figsize=(10, 6))
+    plt.plot(list(data.keys()), list(data.values()), marker="o")
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.grid(True)
+    plt.savefig(filename)
+    plt.close()
+
+
 def plot_jump_model1_results(results, sim):
     if not results:
         print("Error: No results to plot.")
@@ -9,6 +29,7 @@ def plot_jump_model1_results(results, sim):
 
     # Extract data from results
     jobs = []
+
     times = []
     queue_lengths = []
     jobs_processed = []
