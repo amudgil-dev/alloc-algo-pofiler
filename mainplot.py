@@ -5,6 +5,7 @@ from jump_model1_graphs import plot_jump_model1_results, create_plot, create_sub
 from pprint import pprint
 import matplotlib.pyplot as plt
 
+
 vary_n = [10, 100, 500, 1000, 1500, 2000, 2500, 3000]
 vary_beta = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 
@@ -22,6 +23,7 @@ for n in vary_n:
 
     sim.run_simulation()
     print(f"sim over: {time.time()}")
+
     print(f"\nFinal stats:")
     print(f"Total jobs arrived: {sim.jobs_arrived}")
     print(f"Total jobs processed: {sim.jobs_processed}")
@@ -91,7 +93,7 @@ create_subplot(
 
 # Adjust layout and save the figure
 plt.tight_layout()
-plt.savefig("performance_metrics.png", dpi=300)
+plt.savefig("p* alloc algo with 0.25 speedup.png", dpi=300)
 plt.close()
 
 print(

@@ -1,6 +1,7 @@
 import numpy as np
 import heapq
 from collections import deque, namedtuple
+from pallocationStrat import getOptimalServerNum, init_Pstar
 import math
 
 
@@ -26,26 +27,26 @@ Job = namedtuple(
 
 
 class JobMarketSim:
-    def __init__(self, n, beta, alpha, d_n, max_jobs):
-        self.n = n  # number of servers
-        self.beta = beta
-        self.alpha = alpha
-        self.d_n = d_n  # max degree of parellelism
-        self.max_jobs = max_jobs
+    # def __init__(self, n, beta, alpha, d_n, max_jobs):
+    #     self.n = n  # number of servers
+    #     self.beta = beta
+    #     self.alpha = alpha
+    #     self.d_n = d_n  # max degree of parellelism
+    #     self.max_jobs = max_jobs
 
-        # calculate arrival rate of jobs
-        self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
+    #     # calculate arrival rate of jobs
+    #     self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
 
-        self.time = 0  # to simulatee time units passing
-        self.servers = [0] * n  # keep track of the time a server is occupied untill
-        self.queue = deque()
-        self.events = []  # minheap for event scheduling
+    #     self.time = 0  # to simulatee time units passing
+    #     self.servers = [0] * n  # keep track of the time a server is occupied untill
+    #     self.queue = deque()
+    #     self.events = []  # minheap for event scheduling
 
-        # monitoring stats
-        self.jobs_arrived = 0
-        self.jobs_processed = 0
-        self.total_wait_time = 0
-        self.total_processing_time = 0
+    #     # monitoring stats
+    #     self.jobs_arrived = 0
+    #     self.jobs_processed = 0
+    #     self.total_wait_time = 0
+    #     self.total_processing_time = 0
 
     # constructor with max jobs as a function of n
     def __init__(self, n, beta, alpha, d_n):
@@ -62,7 +63,13 @@ class JobMarketSim:
         self.servers = [0] * n  # keep track of the time a server is occupied untill
         self.queue = deque()
         self.events = []  # minheap for event scheduling
+        print(
+            f"arrival rate = {self.arrival_rate} / n = {self.n} = {self.arrival_rate / self.n}"
+        )
 
+        self.p1 = init_Pstar(
+            self.d_n, (self.arrival_rate / self.n), self.get_speedup_factor
+        )  # for p* allocation scheme
         # monitoring stats
         self.jobs_arrived = 0
         self.jobs_processed = 0
@@ -80,8 +87,8 @@ class JobMarketSim:
     """
 
     def get_speedup_factor(self, allocated_servers):
-        # return math.sqrt(allocated_servers)  # sub-linear
-        return allocated_servers  # linear
+        return allocated_servers**0.25  # sub-linear
+        # return allocated_servers  # linear
 
     """
     simple greedy allocation scheme:
@@ -93,8 +100,11 @@ class JobMarketSim:
         available_servers = sum(
             1 for server_time in self.servers if server_time < self.time
         )
+        optimal = getOptimalServerNum(self.p1)
+        # print("optimal ", optimal)
 
-        return min(available_servers, self.d_n)
+        # return min(available_servers, self.d_n) # greedy allocation scheme
+        return min(available_servers, optimal)  # P* allocation scheme
 
     """
     - calculate free servers
