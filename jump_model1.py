@@ -3,6 +3,7 @@ import heapq
 from collections import deque, namedtuple
 from pallocationStrat import getOptimalServerNum, init_Pstar
 import math
+from equi_no_repacking import get_equi_no_repacking_servers
 
 
 """
@@ -27,26 +28,26 @@ Job = namedtuple(
 
 
 class JobMarketSim:
-    # def __init__(self, n, beta, alpha, d_n, max_jobs):
-    #     self.n = n  # number of servers
-    #     self.beta = beta
-    #     self.alpha = alpha
-    #     self.d_n = d_n  # max degree of parellelism
-    #     self.max_jobs = max_jobs
+    def __init__(self, n, beta, alpha, d_n, max_jobs):
+        self.n = n  # number of servers
+        self.beta = beta
+        self.alpha = alpha
+        self.d_n = d_n  # max degree of parellelism
+        self.max_jobs = max_jobs
 
-    #     # calculate arrival rate of jobs
-    #     self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
+        # calculate arrival rate of jobs
+        self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
 
-    #     self.time = 0  # to simulatee time units passing
-    #     self.servers = [0] * n  # keep track of the time a server is occupied untill
-    #     self.queue = deque()
-    #     self.events = []  # minheap for event scheduling
+        self.time = 0  # to simulatee time units passing
+        self.servers = [0] * n  # keep track of the time a server is occupied untill
+        self.queue = deque()
+        self.events = []  # minheap for event scheduling
 
-    #     # monitoring stats
-    #     self.jobs_arrived = 0
-    #     self.jobs_processed = 0
-    #     self.total_wait_time = 0
-    #     self.total_processing_time = 0
+        # monitoring stats
+        self.jobs_arrived = 0
+        self.jobs_processed = 0
+        self.total_wait_time = 0
+        self.total_processing_time = 0
 
     # constructor with max jobs as a function of n
     def __init__(self, n, beta, alpha, d_n):
@@ -56,8 +57,13 @@ class JobMarketSim:
         self.d_n = d_n  # max degree of parellelism
         self.max_jobs = n * 100
 
+        self.total_jobs_in_system = 0
+        self.n_yt_denomiator = 0
+        self.n_yt = 0
+
         # calculate arrival rate of jobs
         self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
+        # self.arrival_rate = 0.5 * self.n
 
         self.time = 0  # to simulatee time units passing
         self.servers = [0] * n  # keep track of the time a server is occupied untill
@@ -87,8 +93,8 @@ class JobMarketSim:
     """
 
     def get_speedup_factor(self, allocated_servers):
-        return allocated_servers**0.25  # sub-linear
-        # return allocated_servers  # linear
+        # return allocated_servers**0.25  # sub-linear
+        return allocated_servers  # linear
 
     """
     simple greedy allocation scheme:
@@ -100,11 +106,13 @@ class JobMarketSim:
         available_servers = sum(
             1 for server_time in self.servers if server_time < self.time
         )
-        optimal = getOptimalServerNum(self.p1)
+        # optimal = getOptimalServerNum(self.p1)
+
+        optimal = get_equi_no_repacking_servers(self.n_yt)
         # print("optimal ", optimal)
 
         # return min(available_servers, self.d_n) # greedy allocation scheme
-        return min(available_servers, optimal)  # P* allocation scheme
+        return min(available_servers, optimal, self.d_n)  # P* allocation scheme
 
     """
     - calculate free servers
@@ -156,9 +164,18 @@ class JobMarketSim:
             self.time, event_type = heapq.heappop(self.events)
 
             if event_type == "arrival":
+                self.total_jobs_in_system += 1
                 self.jobs_arrived += 1
                 # create new Job tuple
                 new_job = Job(self.time, self.generate_execution_time(), 0, None, None)
+
+                # if no queue, reset n_yt
+                if len(self.queue) == 0:
+                    self.n_yt_denomiator = self.total_jobs_in_system
+                else:
+                    self.n_yt_denomiator += 1
+
+                self.n_yt = self.n / self.n_yt_denomiator
 
                 self.process_job(new_job)
 
@@ -168,6 +185,7 @@ class JobMarketSim:
 
             # if jobs finishes, means servers are free so can process next
             elif event_type == "finish":
+                self.total_jobs_in_system -= 1
                 if self.queue:
                     self.process_job(self.queue.popleft())
 

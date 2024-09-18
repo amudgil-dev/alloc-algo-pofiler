@@ -93,7 +93,7 @@ create_subplot(
 
 # Adjust layout and save the figure
 plt.tight_layout()
-plt.savefig("p* alloc algo with 0.25 speedup.png", dpi=300)
+plt.savefig("equi_no_repack_lin_speedup.png", dpi=300)
 plt.close()
 
 print(

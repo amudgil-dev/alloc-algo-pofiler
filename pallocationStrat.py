@@ -2,8 +2,8 @@
 
 import random
 
-arrival_rate = 0.37796447300922725  # self.arrival_rate/self.n
-d_n = 10
+# arrival_rate = 0.5  # self.arrival_rate/self.n
+# d_n = 10
 
 
 # def speedUp(allocated_servers):
@@ -14,7 +14,7 @@ def getPStarVector(d_n, arrival_rate, speedUp):
     slopes = []
     for i in range(1, d_n + 1):
         slopes.append(speedUp(i) / i)
-    # print("slopes", slopes)
+    print("slopes", slopes)
     # case 1: lambda below last slope
     # print(f"arrival rate is {arrival_rate} last P_star is {slopes[-1]}")
     if arrival_rate < slopes[-1]:
@@ -50,7 +50,7 @@ def getPStarVector(d_n, arrival_rate, speedUp):
                     (slopes[i] - arrival_rate) / (slopes[i] - slopes[i + 1]) / (i + 2)
                 )
 
-        # print(y_star)
+    print("ystar", y_star)
 
     p_star = [0] * d_n
     for i, x in enumerate(y_star):
@@ -93,3 +93,19 @@ def getOptimalServerNum(p1):
 # allocatedServers = getOptimalServerNum(p1)
 
 # print(allocatedServers)
+
+
+# myparams = {"n": n, "beta": 0.3, "alpha": 0, "d_n": 10}
+
+# print(f"sim starting: {time.time()}")
+# sim = JobMarketSim(**myparams)
+
+# sim.run_simulation()
+# print(f"sim over: {time.time()}")
+
+# print(f"\nFinal stats:")
+# print(f"Total jobs arrived: {sim.jobs_arrived}")
+# print(f"Total jobs processed: {sim.jobs_processed}")
+# print(f"Jobs in queue: {len(sim.queue)}")
+# print(f"Average wait time: {sim.total_wait_time / sim.jobs_processed:.2f}")
+# print(f"Average processing time: {sim.total_processing_time / sim.jobs_processed:.2f}")
