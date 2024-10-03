@@ -4,7 +4,7 @@ from collections import deque, namedtuple
 from pallocationStrat import getOptimalServerNum, init_Pstar
 import math
 from equi_no_repacking import get_equi_no_repacking_servers
-
+from hetroJobs import JobClassManager
 
 """
 jump_model1 context:
@@ -23,6 +23,7 @@ Job = namedtuple(
         "allocated_servers",
         "start_time",
         "finish_time",
+        "job_class",
     ],
 )
 
@@ -50,7 +51,10 @@ class JobMarketSim:
         self.total_processing_time = 0
 
     # constructor with max jobs as a function of n
+    # now with multi job classes
     def __init__(self, n, beta, alpha, d_n):
+        # instantiate the job classes
+        self.jobClassManager = JobClassManager()
         self.n = n  # number of servers
         self.beta = beta
         self.alpha = alpha
@@ -62,10 +66,14 @@ class JobMarketSim:
         self.n_yt = 0
 
         # calculate arrival rate of jobs
-        self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
+
+        # self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
         # self.arrival_rate = 0.5 * self.n
 
-        self.time = 0  # to simulatee time units passing
+        # total arrival rate is sum of arri rate of the l job classes
+        self.arrival_rate = self.n * self.jobClassManager.totalArrivalRate
+
+        self.time = 0  # to simulatee stime units passing
         self.servers = [0] * n  # keep track of the time a server is occupied untill
         self.queue = deque()
         self.events = []  # minheap for event scheduling
@@ -73,9 +81,10 @@ class JobMarketSim:
             f"arrival rate = {self.arrival_rate} / n = {self.n} = {self.arrival_rate / self.n}"
         )
 
-        self.p1 = init_Pstar(
-            self.d_n, (self.arrival_rate / self.n), self.get_speedup_factor
-        )  # for p* allocation scheme
+        # self.p1 = init_Pstar(
+        #     self.d_n, (self.arrival_rate / self.n), self.get_speedup_factor
+        # )  # for p* allocation scheme
+
         # monitoring stats
         self.jobs_arrived = 0
         self.jobs_processed = 0
@@ -87,6 +96,12 @@ class JobMarketSim:
 
     def generate_execution_time(self):
         return np.random.exponential(1)  # job exe time is ave 1 unit
+
+    # for hetro class case
+    def generate_execution_time(self, jobClassName):
+        # print(" in generate_exe_time", jobClassName)
+        jobClass = self.jobClassManager.jobClassMap[jobClassName]
+        return np.random.exponential(jobClass.mean_size)  # job exe time is ave 1 unit
 
     """
     linear speed up function
@@ -112,7 +127,8 @@ class JobMarketSim:
         # print("optimal ", optimal)
 
         # return min(available_servers, self.d_n) # greedy allocation scheme
-        return min(available_servers, optimal, self.d_n)  # P* allocation scheme
+        # return min(available_servers, optimal, self.d_n)  # P* allocation scheme
+        return min(available_servers, optimal)  # P* allocation scheme
 
     """
     - calculate free servers
@@ -122,13 +138,22 @@ class JobMarketSim:
     """
 
     def process_job(self, job):
-        allocated_servers = self.allocate_servers()
+        jobClass = self.jobClassManager.jobClassMap[job.job_class]
+        allocated_servers = min(self.allocate_servers(), jobClass.parallelism)
 
         if allocated_servers == 0:
             self.queue.append(job)
 
         else:
-            parallelised_exe_time = job.execution_time / self.get_speedup_factor(
+            # parallelised_exe_time = job.execution_time / self.get_speedup_factor(
+            #     allocated_servers
+            # )
+
+            self.jobClassManager.jobClassMap[job.job_class].yi_stats[
+                allocated_servers - 1
+            ] += 1
+
+            parallelised_exe_time = job.execution_time / jobClass.speedup_function(
                 allocated_servers
             )
             job_start_time = self.time
@@ -167,7 +192,21 @@ class JobMarketSim:
                 self.total_jobs_in_system += 1
                 self.jobs_arrived += 1
                 # create new Job tuple
-                new_job = Job(self.time, self.generate_execution_time(), 0, None, None)
+                classForNewJob = self.jobClassManager.determineJobClass()
+                self.jobClassManager.jobClassMap[classForNewJob].arrivalCount += 1
+                # print("under classForNewJob", classForNewJob)
+                # new_job = Job(
+                #     self.time, self.generate_execution_time(), 0, None, None, classForNewJob
+                # )
+
+                new_job = Job(
+                    self.time,
+                    self.generate_execution_time(classForNewJob),
+                    0,
+                    None,
+                    None,
+                    classForNewJob,
+                )
 
                 # if no queue, reset n_yt
                 if len(self.queue) == 0:
@@ -189,25 +228,4 @@ class JobMarketSim:
                 if self.queue:
                     self.process_job(self.queue.popleft())
 
-            # collect stats every 10 jobs
-            # if (
-            #     self.jobs_arrived % 10 == 0 and self.jobs_processed > 0
-            # ):  # catch divide by 0 case
-            # busy_servers = sum(
-            #     1 for server_time in self.servers if server_time > self.time
-            # )
-
-            # stats.append(
-            #     {
-            #         "jobs": self.jobs_arrived,
-            #         "time": self.time,
-            #         "queue_length": len(self.queue),
-            #         "jobs_processed": self.jobs_processed,
-            #         "busy_servers": busy_servers,
-            #         "ave_wait_time": self.total_wait_time / self.jobs_processed,
-            #         "ave_processing_time": self.total_processing_time
-            #         / self.jobs_processed,
-            #     }
-            # )
-
-        return stats
+        return self.jobClassManager.get_jobClass_yi_stats()

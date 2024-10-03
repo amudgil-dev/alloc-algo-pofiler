@@ -1,3 +1,1 @@
-
-from scipy import stats
-from scipy.stats import poisson
+vary_beta

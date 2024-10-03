@@ -6,15 +6,20 @@ import random
 # d_n = 10
 
 
-# def speedUp(allocated_servers):
-#     return allocated_servers**0.5
+def speedUp(allocated_servers):
+    return allocated_servers**0.8
+
+
+# testing match with solver
+d_n = 10  # maximum parallelism
+arrival_rate = 0.8  # arrival rate
 
 
 def getPStarVector(d_n, arrival_rate, speedUp):
     slopes = []
     for i in range(1, d_n + 1):
         slopes.append(speedUp(i) / i)
-    print("slopes", slopes)
+    # print("slopes", slopes)
     # case 1: lambda below last slope
     # print(f"arrival rate is {arrival_rate} last P_star is {slopes[-1]}")
     if arrival_rate < slopes[-1]:
@@ -50,7 +55,7 @@ def getPStarVector(d_n, arrival_rate, speedUp):
                     (slopes[i] - arrival_rate) / (slopes[i] - slopes[i + 1]) / (i + 2)
                 )
 
-    print("ystar", y_star)
+    print("ystar:", y_star)
 
     p_star = [0] * d_n
     for i, x in enumerate(y_star):
@@ -89,7 +94,7 @@ def getOptimalServerNum(p1):
         return p1[1] + 1
 
 
-# p1 = init_Pstar(d_n, arrival_rate, speedUp)
+p1 = init_Pstar(d_n, arrival_rate, speedUp)
 # allocatedServers = getOptimalServerNum(p1)
 
 # print(allocatedServers)
