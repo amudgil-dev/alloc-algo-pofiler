@@ -107,7 +107,7 @@ create_subplot(
 
 # Adjust layout and save the figure
 plt.tight_layout()
-plt.savefig("equi_multiclassJobs1.png", dpi=300)
+plt.savefig("perato_size_equi.png", dpi=300)
 plt.close()
 
 print(

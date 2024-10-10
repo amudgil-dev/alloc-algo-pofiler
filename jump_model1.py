@@ -94,14 +94,15 @@ class JobMarketSim:
     def generate_interarrival_time(self):
         return np.random.exponential(1 / self.arrival_rate)
 
-    def generate_execution_time(self):
-        return np.random.exponential(1)  # job exe time is ave 1 unit
+    # def generate_execution_time(self):
+    #     return np.random.exponential(1)  # job exe time is ave 1 unit
 
     # for hetro class case
     def generate_execution_time(self, jobClassName):
         # print(" in generate_exe_time", jobClassName)
         jobClass = self.jobClassManager.jobClassMap[jobClassName]
-        return np.random.exponential(jobClass.mean_size)  # job exe time is ave 1 unit
+        # return np.random.exponential(jobClass.mean_size)  # job exe time is ave 1 unit
+        return jobClass.generate_job_size_function()  # job exe time is ave 1 unit
 
     """
     linear speed up function
