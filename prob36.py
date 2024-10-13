@@ -69,7 +69,7 @@ def solve_optimal_allocation(n, job_classes):
 job_classes = {
     "A": JobClass(
         "A",
-        arrival_rate=0.1,
+        arrival_rate=0.8,
         mean_size=1,
         parallelism=5,
         speedup_function=lambda x: x**0.8,

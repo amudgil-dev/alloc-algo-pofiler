@@ -90,20 +90,20 @@ create_subplot(
     "Number of Servers (n)",
     "Average Processing Time",
 )
-create_subplot(
-    axs[1, 0],
-    wait_arrival,
-    "Average Wait Time vs Arrival Rate",
-    "Normalised Arrival Rate (nλ)",
-    "Average Wait Time",
-)
-create_subplot(
-    axs[1, 1],
-    processing_arrival,
-    "Average Processing Time vs Arrival Rate",
-    "Normalised Arrival Rate (nλ)",
-    "Average Processing Time",
-)
+# create_subplot(
+#     axs[1, 0],
+#     wait_arrival,
+#     "Average Wait Time vs Arrival Rate",
+#     "Normalised Arrival Rate (nλ)",
+#     "Average Wait Time",
+# )
+# create_subplot(
+#     axs[1, 1],
+#     processing_arrival,
+#     "Average Processing Time vs Arrival Rate",
+#     "Normalised Arrival Rate (nλ)",
+#     "Average Processing Time",
+# )
 
 # Adjust layout and save the figure
 plt.tight_layout()

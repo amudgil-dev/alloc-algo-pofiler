@@ -26,10 +26,10 @@ class JobClassManager:
             mean_size=1,
             parallelism=5,
             speedup_function=lambda x: x**0.8,
-            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_mixed_erlang(),
             # generate_job_size_function=lambda: generate_exponential_job_size(1),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
-            generate_job_size_function=lambda: generate_perato(),
+            # generate_job_size_function=lambda: generate_perato(),
         )
         self.jobClassMap["B"] = JobClass(
             "B",
@@ -37,10 +37,10 @@ class JobClassManager:
             mean_size=2,
             parallelism=8,
             speedup_function=lambda x: x**0.7,
-            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_mixed_erlang(),
             # generate_job_size_function=lambda: generate_exponential_job_size(2),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
-            generate_job_size_function=lambda: generate_perato(),
+            # generate_job_size_function=lambda: generate_perato(),
         )
         self.jobClassMap["C"] = JobClass(
             "C",
@@ -48,10 +48,10 @@ class JobClassManager:
             mean_size=1.5,
             parallelism=10,
             speedup_function=lambda x: x**0.9,
-            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_mixed_erlang(),
             # generate_job_size_function=lambda: generate_exponential_job_size(1.5),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
-            generate_job_size_function=lambda: generate_perato(),
+            # generate_job_size_function=lambda: generate_perato(),
         )
         self.jobClassMap["D"] = JobClass(
             "D",
@@ -59,10 +59,10 @@ class JobClassManager:
             mean_size=0.5,
             parallelism=3,
             speedup_function=lambda x: x**0.6,
-            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_mixed_erlang(),
             # generate_job_size_function=lambda: generate_exponential_job_size(0.5),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
-            generate_job_size_function=lambda: generate_perato(),
+            # generate_job_size_function=lambda: generate_perato(),
         )
         self.jobClassMap["E"] = JobClass(
             "E",
@@ -70,10 +70,10 @@ class JobClassManager:
             mean_size=1.2,
             parallelism=6,
             speedup_function=lambda x: x**0.75,
-            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_mixed_erlang(),
             # generate_job_size_function=lambda: generate_exponential_job_size(1.2),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
-            generate_job_size_function=lambda: generate_perato(),
+            # generate_job_size_function=lambda: generate_perato(),
         )
 
     def determineJobClass(self):
