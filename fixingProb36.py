@@ -3,37 +3,43 @@ import numpy as np
 from hetroJobs import JobClassManager, JobClass, generate_exponential_job_size
 
 
-def solve_optimal_allocation(job_classes):
-    # print(f"Starting optimization for {len(job_classes)} job classes with {n} servers")
+def solve_optimal_allocation(n, job_classes):
+    print(f"Starting optimization for {len(job_classes)} job classes with {n} servers")
 
     # Define variables
+    # create a CVXPY Variable for each job class with dimension equal to the parallelism of the job class
     y = {k: cp.Variable(jc.parallelism) for k, jc in job_classes.items()}
     print("Variables defined")
 
     # Define objective
     objective = cp.Minimize(
-        sum(cp.sum(y[k]) / jc.arrival_rate for k, jc in job_classes.items())
+        sum(cp.sum(y[k]) / (jc.arrival_rate) for k, jc in job_classes.items())
     )
     print("Objective function defined")
 
     # Define constraints
-    constraints = []
+    capacity_constraints = []
+    rtc_constraints = []
+    non_neg_constraints = []
 
-    # Total capacity constraint
-    # ISSUE WITH THIS
-    constraints.append(
+    fixed_capacity_constraint = (
         cp.sum(
             [
                 cp.sum([i * y[k][i - 1] for i in range(1, jc.parallelism + 1)])
                 for k, jc in job_classes.items()
             ]
         )
-        <= 1
+        <= n
     )
 
     for k, jc in job_classes.items():
-        # Rate conservation constraint
-        constraints.append(
+        capacity_constraints.append(
+            # c1: busy servers <= total servers
+            cp.sum([i * y[k][i - 1] for i in range(1, jc.parallelism + 1)])
+            <= n
+        )
+        rtc_constraints.append(
+            # c2: departure rate = arrival rate noramlised by job size
             cp.sum(
                 [
                     jc.speedup_values[i - 1] * y[k][i - 1]
@@ -42,15 +48,22 @@ def solve_optimal_allocation(job_classes):
             )
             == (jc.arrival_rate / jc.mean_size)
         )
-        # Non-negativity constraint
-        constraints.append(y[k] >= 0)
+        # c3: non neg yis
+        non_neg_constraints.append(y[k] >= 0)
+
+    # # assign constraints
+    # constraints = capacity_constraints + rtc_constraints + non_neg_constraints
+
+    # assign constraints
+    constraints = rtc_constraints + non_neg_constraints
+    constraints.append(fixed_capacity_constraint)
 
     print(f"Constraints defined: {len(constraints)} constraints in total")
 
     # Define and solve the problem
     problem = cp.Problem(objective, constraints)
     print("Problem defined, starting solver...")
-    problem.solve(solver=cp.ECOS, verbose=True)
+    problem.solve()
     print(f"Solver status: {problem.status}")
 
     # Check if the problem was solved successfully
@@ -71,55 +84,52 @@ def solve_optimal_allocation(job_classes):
 job_classes = {
     "A": JobClass(
         "A",
-        arrival_rate=0.7,
+        arrival_rate=0.8,
         mean_size=1,
-        parallelism=2,
+        parallelism=5,
         speedup_function=lambda x: x**0.8,
         generate_job_size_function=lambda: generate_exponential_job_size(1),
     ),
     "B": JobClass(
         "B",
-        arrival_rate=0.5,
+        arrival_rate=0.1,
         mean_size=2,
-        parallelism=2,
-        speedup_function=lambda x: x ** (1 / 3),
+        parallelism=80,
+        speedup_function=lambda x: x**0.7,
         generate_job_size_function=lambda: generate_exponential_job_size(2),
     ),
-    # "C": JobClass(
-    #     "C",
-    #     arrival_rate=0.7,
-    #     mean_size=1.5,
-    #     parallelism=10,
-    #     speedup_function=lambda x: x**0.9,
-    #     generate_job_size_function=lambda: generate_exponential_job_size(1.5),
-    # ),
-    # "D": JobClass(
-    #     "D",
-    #     arrival_rate=0.5,
-    #     mean_size=0.5,
-    #     parallelism=3,
-    #     speedup_function=lambda x: x**0.6,
-    #     generate_job_size_function=lambda: generate_exponential_job_size(0.5),
-    # ),
-    # "E": JobClass(
-    #     "E",
-    #     arrival_rate=0.6,
-    #     mean_size=1.2,
-    #     parallelism=6,
-    #     speedup_function=lambda x: x**0.75,
-    #     generate_job_size_function=lambda: generate_exponential_job_size(1.5),
-    # ),
+    "C": JobClass(
+        "C",
+        arrival_rate=0.7,
+        mean_size=1.5,
+        parallelism=10,
+        speedup_function=lambda x: x**0.9,
+        generate_job_size_function=lambda: generate_exponential_job_size(1.5),
+    ),
+    "D": JobClass(
+        "D",
+        arrival_rate=0.5,
+        mean_size=0.5,
+        parallelism=3,
+        speedup_function=lambda x: x**0.6,
+        generate_job_size_function=lambda: generate_exponential_job_size(0.5),
+    ),
+    "E": JobClass(
+        "E",
+        arrival_rate=0.6,
+        mean_size=1.2,
+        parallelism=6,
+        speedup_function=lambda x: x**0.75,
+        generate_job_size_function=lambda: generate_exponential_job_size(1.5),
+    ),
 }
-# n = 100
+n = 100
 
 # Precompute speedup values for each job class
 for jc in job_classes.values():
     jc.speedup_values = [jc.speedup_function(i) for i in range(1, jc.parallelism + 1)]
-    print("--------------------------------------------------------------")
-    print(jc.speedup_values)
-    print("*******************************************")
 
-optimal_y = solve_optimal_allocation(job_classes)
+optimal_y = solve_optimal_allocation(n, job_classes)
 
 # for k, v in optimal_y.items():
 #     print(k, v)
@@ -150,6 +160,3 @@ total_p_sum = sum(
     for k, jc in job_classes.items()
 )
 print(f"\nTotal sum of all pij across job classes: {total_p_sum:.6f}")
-
-
-# cvxpy see how far you are from your optimal constraints
