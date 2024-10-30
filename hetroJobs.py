@@ -22,58 +22,73 @@ class JobClassManager:
     def initJobClasses(self):
         self.jobClassMap["A"] = JobClass(
             "A",
-            arrival_rate=0.1,
+            # arrival_rate=0.3,
+            arrival_rate=0.0,
             mean_size=1,
             parallelism=5,
             speedup_function=lambda x: x**0.8,
-            generate_job_size_function=lambda: generate_mixed_erlang(),
-            # generate_job_size_function=lambda: generate_exponential_job_size(1),
+            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_exponential_job_size(1),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
             # generate_job_size_function=lambda: generate_perato(),
+            pstar_alloc_strategy={
+                "type": "probabilistic",
+                "probs": {1: 0.459, 2: 0.541},
+            },
         )
+
         self.jobClassMap["B"] = JobClass(
             "B",
-            arrival_rate=0.1,
-            mean_size=2,
+            # arrival_rate=0.5,
+            arrival_rate=0,
+            mean_size=4,
             parallelism=8,
             speedup_function=lambda x: x**0.7,
-            generate_job_size_function=lambda: generate_mixed_erlang(),
-            # generate_job_size_function=lambda: generate_exponential_job_size(2),
+            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_exponential_job_size(4),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
             # generate_job_size_function=lambda: generate_perato(),
+            pstar_alloc_strategy={"type": "fixed", "servers": 1},
         )
         self.jobClassMap["C"] = JobClass(
             "C",
-            arrival_rate=0.05,
-            mean_size=1.5,
+            # arrival_rate=0.3,
+            arrival_rate=0,
+            mean_size=0.7,
             parallelism=10,
             speedup_function=lambda x: x**0.9,
-            generate_job_size_function=lambda: generate_mixed_erlang(),
-            # generate_job_size_function=lambda: generate_exponential_job_size(1.5),
+            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_exponential_job_size(0.7),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
             # generate_job_size_function=lambda: generate_perato(),
+            pstar_alloc_strategy={"type": "fixed", "servers": 3},
         )
         self.jobClassMap["D"] = JobClass(
             "D",
-            arrival_rate=0.15,
-            mean_size=0.5,
+            arrival_rate=0.1,
+            mean_size=0.7,
             parallelism=3,
-            speedup_function=lambda x: x**0.6,
-            generate_job_size_function=lambda: generate_mixed_erlang(),
-            # generate_job_size_function=lambda: generate_exponential_job_size(0.5),
+            speedup_function=lambda x: x**0.1,
+            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_exponential_job_size(0.7),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
             # generate_job_size_function=lambda: generate_perato(),
+            pstar_alloc_strategy={"type": "fixed", "servers": 2},
         )
         self.jobClassMap["E"] = JobClass(
             "E",
-            arrival_rate=0.1,
+            arrival_rate=0.6,
             mean_size=1.2,
-            parallelism=6,
-            speedup_function=lambda x: x**0.75,
-            generate_job_size_function=lambda: generate_mixed_erlang(),
-            # generate_job_size_function=lambda: generate_exponential_job_size(1.2),
+            parallelism=10,
+            speedup_function=lambda x: x**0.5,
+            # generate_job_size_function=lambda: generate_mixed_erlang(),
+            generate_job_size_function=lambda: generate_exponential_job_size(1.2),
             # generate_job_size_function=lambda: generate_deterministic_job_size(),
             # generate_job_size_function=lambda: generate_perato(),
+            pstar_alloc_strategy={
+                "type": "probabilistic",
+                "probs": {2: 0.834, 3: 0.166},
+            },
         )
 
     def determineJobClass(self):
@@ -104,6 +119,7 @@ class JobClass:
         parallelism,
         speedup_function,
         generate_job_size_function,
+        pstar_alloc_strategy,
     ):
         self.name = name
         self.arrival_rate = arrival_rate
@@ -114,6 +130,7 @@ class JobClass:
         self.yi_stats = [0] * parallelism
         self.arrivalCount = 0
         self.generate_job_size_function = generate_job_size_function
+        self.pstar_alloc_strategy = pstar_alloc_strategy
 
 
 def generate_exponential_job_size(mean):

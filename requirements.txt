@@ -1,0 +1,13 @@
+# Runtime Packages
+numpy
+scipy
+matplotlib
+cvxpy
+python-dotenv
+
+# development
+black  # for formatting code
+pylint # for static code analysis
+# Testing packages
+pytest    # testing framework
+freezegun # allows python tests to travel through time by mocking datetime module

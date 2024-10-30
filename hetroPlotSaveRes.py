@@ -55,6 +55,6 @@ results = {
     "final_yi": {k: [list(v) for v in final_yi[k]] for k in final_yi},
 }
 
-save_to_file(results, "mixed_erl_results.txt")
+save_to_file(results, "tues29oct_2class_exp_pstar_results.txt")
 
 print("Results have been saved to mixed_erl_results.txt")

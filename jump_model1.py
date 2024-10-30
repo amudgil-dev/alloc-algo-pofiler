@@ -39,7 +39,7 @@ class JobMarketSim:
         # calculate arrival rate of jobs
         self.arrival_rate = self.n * (1 - (self.beta * self.n ** (-self.alpha)))
 
-        self.time = 0  # to simulatee time units passing
+        self.time = 0  # to simulate time units passing
         self.servers = [0] * n  # keep track of the time a server is occupied untill
         self.queue = deque()
         self.events = []  # minheap for event scheduling
@@ -138,9 +138,28 @@ class JobMarketSim:
     - log stats
     """
 
+    def alloc_servers_pstar(self, jobClass_Obj):
+        # print(f"in alloc servers pstar {jobClass_Obj}")
+
+        # Determine the number of servers to allocate based on the job class strategy
+        if jobClass_Obj.pstar_alloc_strategy["type"] == "probabilistic":
+            probs = jobClass_Obj.pstar_alloc_strategy["probs"]
+            allocated_servers = np.random.choice(
+                list(probs.keys()), p=list(probs.values())
+            )
+        elif jobClass_Obj.pstar_alloc_strategy["type"] == "fixed":
+            allocated_servers = jobClass_Obj.pstar_alloc_strategy["servers"]
+        return allocated_servers
+
     def process_job(self, job):
         jobClass = self.jobClassManager.jobClassMap[job.job_class]
-        allocated_servers = min(self.allocate_servers(), jobClass.parallelism)
+        # allocated_servers = min(self.allocate_servers(), jobClass.parallelism)
+        available_servers = sum(
+            1 for server_time in self.servers if server_time < self.time
+        )
+        allocated_servers = min(
+            self.alloc_servers_pstar(jobClass), jobClass.parallelism, available_servers
+        )
 
         if allocated_servers == 0:
             self.queue.append(job)
