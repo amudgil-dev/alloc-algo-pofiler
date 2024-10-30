@@ -12,6 +12,11 @@ from app.models.jump_model import JobMarketSim
 from app.models.jump_model_graphs import create_subplot
 from config import Config
 
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
 
 def ensure_directory_exists(directory):
     """
@@ -156,7 +161,8 @@ def create_and_save_plots(data_dict, plot_folder):
     return plot_filename
 
 
-if __name__ == "__main__":
+def start_program():
+
     ensure_directory_exists(Config.RESULTS_FOLDER)
     ensure_directory_exists(Config.RESULTS_FOLDER)
 
