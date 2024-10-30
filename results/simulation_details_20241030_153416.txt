@@ -1,0 +1,153 @@
+
+Simulation with n = 10
+Simulation starting: 2024-10-30 15:28:47
+Simulation ended: 2024-10-30 15:28:47
+Total jobs arrived: 1000
+Total jobs processed: 871
+Jobs in queue: 129
+Average wait time: 5.56
+Average processing time: 0.92
+
+Simulation with n = 100
+Simulation starting: 2024-10-30 15:28:47
+Simulation ended: 2024-10-30 15:28:47
+Total jobs arrived: 10000
+Total jobs processed: 8731
+Jobs in queue: 1269
+Average wait time: 6.60
+Average processing time: 0.85
+
+Simulation with n = 500
+Simulation starting: 2024-10-30 15:28:47
+Simulation ended: 2024-10-30 15:28:50
+Total jobs arrived: 50000
+Total jobs processed: 45043
+Jobs in queue: 4957
+Average wait time: 5.75
+Average processing time: 0.84
+
+Simulation with n = 1000
+Simulation starting: 2024-10-30 15:28:50
+Simulation ended: 2024-10-30 15:29:00
+Total jobs arrived: 100000
+Total jobs processed: 89612
+Jobs in queue: 10388
+Average wait time: 5.91
+Average processing time: 0.85
+
+Simulation with n = 1500
+Simulation starting: 2024-10-30 15:29:00
+Simulation ended: 2024-10-30 15:29:23
+Total jobs arrived: 150000
+Total jobs processed: 133600
+Jobs in queue: 16400
+Average wait time: 6.18
+Average processing time: 0.85
+
+Simulation with n = 2000
+Simulation starting: 2024-10-30 15:29:23
+Simulation ended: 2024-10-30 15:30:05
+Total jobs arrived: 200000
+Total jobs processed: 178179
+Jobs in queue: 21821
+Average wait time: 6.16
+Average processing time: 0.84
+
+Simulation with n = 2500
+Simulation starting: 2024-10-30 15:30:05
+Simulation ended: 2024-10-30 15:31:10
+Total jobs arrived: 250000
+Total jobs processed: 222905
+Jobs in queue: 27095
+Average wait time: 6.13
+Average processing time: 0.84
+
+Simulation with n = 3000
+Simulation starting: 2024-10-30 15:31:10
+Simulation ended: 2024-10-30 15:32:40
+Total jobs arrived: 300000
+Total jobs processed: 266854
+Jobs in queue: 33146
+Average wait time: 6.36
+Average processing time: 0.85
+
+Simulation with beta = 0.1
+Simulation starting: 2024-10-30 15:32:40
+Simulation ended: 2024-10-30 15:32:51
+Total jobs arrived: 100000
+Total jobs processed: 89191
+Jobs in queue: 10809
+Average wait time: 6.06
+Average processing time: 0.84
+
+Simulation with beta = 0.2
+Simulation starting: 2024-10-30 15:32:51
+Simulation ended: 2024-10-30 15:33:01
+Total jobs arrived: 100000
+Total jobs processed: 89562
+Jobs in queue: 10438
+Average wait time: 6.06
+Average processing time: 0.84
+
+Simulation with beta = 0.3
+Simulation starting: 2024-10-30 15:33:01
+Simulation ended: 2024-10-30 15:33:12
+Total jobs arrived: 100000
+Total jobs processed: 89244
+Jobs in queue: 10756
+Average wait time: 5.87
+Average processing time: 0.85
+
+Simulation with beta = 0.4
+Simulation starting: 2024-10-30 15:33:12
+Simulation ended: 2024-10-30 15:33:23
+Total jobs arrived: 100000
+Total jobs processed: 89249
+Jobs in queue: 10751
+Average wait time: 6.21
+Average processing time: 0.84
+
+Simulation with beta = 0.5
+Simulation starting: 2024-10-30 15:33:23
+Simulation ended: 2024-10-30 15:33:33
+Total jobs arrived: 100000
+Total jobs processed: 89464
+Jobs in queue: 10536
+Average wait time: 6.03
+Average processing time: 0.84
+
+Simulation with beta = 0.6
+Simulation starting: 2024-10-30 15:33:33
+Simulation ended: 2024-10-30 15:33:44
+Total jobs arrived: 100000
+Total jobs processed: 89068
+Jobs in queue: 10932
+Average wait time: 6.53
+Average processing time: 0.85
+
+Simulation with beta = 0.7
+Simulation starting: 2024-10-30 15:33:44
+Simulation ended: 2024-10-30 15:33:54
+Total jobs arrived: 100000
+Total jobs processed: 88879
+Jobs in queue: 11121
+Average wait time: 6.40
+Average processing time: 0.85
+
+Simulation with beta = 0.8
+Simulation starting: 2024-10-30 15:33:54
+Simulation ended: 2024-10-30 15:34:05
+Total jobs arrived: 100000
+Total jobs processed: 88789
+Jobs in queue: 11211
+Average wait time: 5.95
+Average processing time: 0.84
+
+Simulation with beta = 0.9
+Simulation starting: 2024-10-30 15:34:05
+Simulation ended: 2024-10-30 15:34:16
+Total jobs arrived: 100000
+Total jobs processed: 89306
+Jobs in queue: 10694
+Average wait time: 6.21
+Average processing time: 0.84

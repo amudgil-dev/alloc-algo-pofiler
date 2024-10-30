@@ -1,0 +1,133 @@
+
+--- New Simulation Run: 2024-10-30 15:19:41 ---
+
+Simulation parameters: {'n': 10, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:19:41
+Simulation ended: 2024-10-30 15:19:41
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.21014493, 0.64492754, 0.        ]), 'E': array([0.2262181 , 0.59048724, 0.00232019, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 1000
+Total jobs processed: 824
+Jobs in queue: 176
+Average wait time: 8.19
+Average processing time: 0.93
+
+Simulation parameters: {'n': 100, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:19:41
+Simulation ended: 2024-10-30 15:19:41
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.05430183, 0.82087447, 0.        ]), 'E': array([0.04928921, 0.82148683, 0.00116523, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 10000
+Total jobs processed: 8724
+Jobs in queue: 1276
+Average wait time: 7.94
+Average processing time: 0.86
+
+Simulation parameters: {'n': 500, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:19:41
+Simulation ended: 2024-10-30 15:19:44
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.06768405, 0.81856719, 0.        ]), 'E': array([0.06833166, 0.81147636, 0.00205018, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 50000
+Total jobs processed: 44124
+Jobs in queue: 5876
+Average wait time: 6.45
+Average processing time: 0.85
+
+Simulation parameters: {'n': 1000, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:19:44
+Simulation ended: 2024-10-30 15:19:55
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.06638685, 0.82469395, 0.        ]), 'E': array([0.06742897, 0.81892538, 0.00215857, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 100000
+Total jobs processed: 88888
+Jobs in queue: 11112
+Average wait time: 6.40
+Average processing time: 0.84
+
+Simulation parameters: {'n': 1500, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:19:55
+Simulation ended: 2024-10-30 15:20:17
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.06453559, 0.82323467, 0.        ]), 'E': array([0.06183143, 0.82510938, 0.00204755, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 150000
+Total jobs processed: 133322
+Jobs in queue: 16678
+Average wait time: 6.11
+Average processing time: 0.84
+
+Simulation parameters: {'n': 2000, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:20:17
+Simulation ended: 2024-10-30 15:20:53
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.07904276, 0.81650537, 0.        ]), 'E': array([0.07581665, 0.81857971, 0.00192325, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 200000
+Total jobs processed: 179242
+Jobs in queue: 20758
+Average wait time: 5.72
+Average processing time: 0.84
+
+Simulation parameters: {'n': 2500, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:20:53
+Simulation ended: 2024-10-30 15:21:50
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.06377465, 0.82997183, 0.        ]), 'E': array([0.06234965, 0.82931002, 0.00192541, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 250000
+Total jobs processed: 223402
+Jobs in queue: 26598
+Average wait time: 6.05
+Average processing time: 0.84
+
+Simulation parameters: {'n': 3000, 'beta': 0.3, 'alpha': 0, 'd_n': 10}
+Simulation starting: 2024-10-30 15:21:50
+Simulation ended: 2024-10-30 15:23:28
+yi_stats: {'A': array([0, 0, 0, 0, 0]), 'B': array([0, 0, 0, 0, 0, 0, 0, 0]), 'C': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 'D': array([0.06026848, 0.82944905, 0.        ]), 'E': array([0.05984239, 0.82727973, 0.00187093, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ])}
+
+Final stats:
+Total jobs arrived: 300000
+Total jobs processed: 266729
+Jobs in queue: 33271
+Average wait time: 6.26
+Average processing time: 0.84
+
+------------ yi vals --------------
+job class A yis: [np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0)]
+job class B yis: [np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0)]
+job class C yis: [np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0)]
+job class D yis: [np.float64(0.08326739125041675), np.float64(0.8010280079770647), np.float64(0.0)]
+job class E yis: [np.float64(0.08388850821475902), np.float64(0.792831833657018), np.float64(0.0019326621041874448), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0), np.float64(0.0)]
+
+Average Wait Time vs Number of Servers:
+n: 10, Average Wait Time: 8.186894841604133
+n: 100, Average Wait Time: 7.9391186056144925
+n: 500, Average Wait Time: 6.449557223460151
+n: 1000, Average Wait Time: 6.402555352143123
+n: 1500, Average Wait Time: 6.111638438965211
+n: 2000, Average Wait Time: 5.720732095660049
+n: 2500, Average Wait Time: 6.052824268704036
+n: 3000, Average Wait Time: 6.256285529797435
+
+Average Processing Time vs Number of Servers:
+n: 10, Average Processing Time: 0.9335498081313581
+n: 100, Average Processing Time: 0.8599615684160217
+n: 500, Average Processing Time: 0.8539172716371842
+n: 1000, Average Processing Time: 0.8418067180053111
+n: 1500, Average Processing Time: 0.8436433397068213
+n: 2000, Average Processing Time: 0.8435071509031224
+n: 2500, Average Processing Time: 0.8410311631394368
+n: 3000, Average Processing Time: 0.8425265501678808
