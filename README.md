@@ -1,10 +1,40 @@
-## Context on the project
+## Context on the Project
 
-      Unprecedented demands are being placed on compute resources due to HPC jobs such as next-gen machine learning. Distributed systems rely on resource provisioning algorithms to parallelise these jobs across many nodes; however, traditional algorithms are unlikely to perform- an inefficient and costly waste of resources.
+Unprecedented demands are being placed on compute resources due to HPC jobs such as next-gen machine learning. Distributed systems rely on resource provisioning algorithms to parallelise these jobs across many nodes; however, traditional algorithms are unlikely to perform optimally, resulting in an inefficient and costly waste of resources.
 
-      This research aims to design the optimal algorithm for parallelisable tasks, under a real-world workload, and validate theoretical expectations with the results from system simulations.
+This research aims to:
 
-     This simulation platform is open source and is intended for researchers and hobbyists in this field to profile their own resource allocation algorithms under various workloads and traffic conditions.
+1. Design the optimal algorithm for parallelisable tasks under real-world workloads.
+2. Validate theoretical expectations with results from system simulations.
+
+### Open-Source Simulation Platform
+
+This simulation platform is open-source and intended for researchers and hobbyists in the field of distributed computing. It allows users to profile their own resource allocation algorithms under various workloads and traffic conditions.
+
+**Key Features:**
+- Customizable workload scenarios
+- Performance profiling for resource allocation algorithms
+- Comparison of theoretical models with practical results
+
+By providing this tool, we aim to foster innovation in resource provisioning algorithms and contribute to more efficient utilization of compute resources in distributed systems.## Context on the Project
+
+Unprecedented demands are being placed on compute resources due to HPC jobs such as next-gen machine learning. Distributed systems rely on resource provisioning algorithms to parallelise these jobs across many nodes; however, traditional algorithms are unlikely to perform optimally, resulting in an inefficient and costly waste of resources.
+
+This research aims to:
+
+1. Design the optimal algorithm for parallelisable tasks under real-world workloads.
+2. Validate theoretical expectations with results from system simulations.
+
+### Open-Source Simulation Platform
+
+This simulation platform is open-source and intended for researchers and hobbyists in the field of distributed computing. It allows users to profile their own resource allocation algorithms under various workloads and traffic conditions.
+
+**Key Features:**
+- Customizable workload scenarios
+- Performance profiling for resource allocation algorithms
+- Comparison of theoretical models with practical results
+
+By providing this tool, we aim to foster innovation in resource provisioning algorithms and contribute to more efficient utilization of compute resources in distributed systems.
 
 # Job Market Simulation Model
 app/models/jump_model.py
