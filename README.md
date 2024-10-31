@@ -1,4 +1,4 @@
-## Context on the Project
+## Context
 
 Unprecedented demands are being placed on compute resources due to HPC jobs such as next-gen machine learning. Distributed systems rely on resource provisioning algorithms to parallelise these jobs across many nodes; however, traditional algorithms are unlikely to perform optimally, resulting in an inefficient and costly waste of resources.
 
