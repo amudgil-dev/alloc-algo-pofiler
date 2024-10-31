@@ -1,11 +1,10 @@
 ## Context on the project
 
-      \textbf{Unprecedented demands} are being placed on compute resources due to HPC jobs such as next-gen machine learning. Distributed systems rely on resource provisioning algorithms to parallelise these jobs across many nodes; however, traditional algorithms are unlikely to perform- an \textbf{inefficient and costly} waste of power and time.
-      \vspace{0.1cm} % Add space below the text
+      Unprecedented demands are being placed on compute resources due to HPC jobs such as next-gen machine learning. Distributed systems rely on resource provisioning algorithms to parallelise these jobs across many nodes; however, traditional algorithms are unlikely to perform- an inefficient and costly waste of resources.
 
-      This research aims to \textbf{design the optimal algorithm for parallelisable tasks}, under a real-world workload, and validate theoretical expectations with the results from system simulations.
+      This research aims to design the optimal algorithm for parallelisable tasks, under a real-world workload, and validate theoretical expectations with the results from system simulations.
 
-**      This simulation platform is open source and is intended for researchers and hobbyists in this field to profile their own resource allocation algorithms under various workloads and traffic conditions. **
+     This simulation platform is open source and is intended for researchers and hobbyists in this field to profile their own resource allocation algorithms under various workloads and traffic conditions.
 
 # Job Market Simulation Model
 app/models/jump_model.py
@@ -22,7 +21,7 @@ Jobs are modelled as Poisson processes, characterized by:
 
 In a Poisson process, interarrival times follow the exponential distribution, which has the memoryless property.
 
-## Job Arrival Times
+## Mathematical Notation Explained
 
 - λ: Rate of arrival per unit time
 - 1/λ: Mean interarrival time
