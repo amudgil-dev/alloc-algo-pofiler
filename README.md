@@ -18,7 +18,7 @@ This simulation platform is open-source and intended for researchers and hobbyis
 
 By providing this tool, we aim to foster innovation in resource provisioning algorithms and contribute to more efficient utilization of compute resources in distributed systems.## Context on the Project
 
-# Job Market Simulation Model
+# Job Simulation Model
 app/models/jump_model.py
 
 
