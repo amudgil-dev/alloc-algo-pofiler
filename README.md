@@ -16,7 +16,9 @@ This simulation platform is open-source and intended for researchers and hobbyis
 - graphs for comparison and visualisation
 - Customizable workload scenarios through defining various job types
 
-By providing this tool, we aim to foster innovation in resource provisioning algorithms and contribute to more efficient utilization of compute resources in distributed systems.## Context on the Project
+By providing this tool, we aim to foster innovation in resource provisioning algorithms and contribute to more efficient utilization of compute resources in distributed systems.
+
+![Poster: On Optimal Resource Allocation Algorithms](docs/allocAlgoPoster.png)
 
 # Job Simulation Model
 app/models/jump_model.py
@@ -87,14 +89,8 @@ If no server is available upon job arrival, the job is blocked/queued (loss).
 - Allocated servers remain occupied for the duration of job execution
 
 ## p\* Server Allocation Scheme
+  - optimality is proved mathematically and verified through simulation for the homogenous workload case
 
-(Details to be added)
-
-## Questions for Further Investigation
-
-- How to implement the other greedy scheme
-- How the sublinear speed-up function is set and incorporated into the model
-- Why graphs appear different from final results
 
 ## Plots
 
@@ -111,13 +107,13 @@ Expected results:
 
 ### Plot 1: Average Wait Time vs. n
 
-- X-axis: Increasing n
-- Y-axis: Average wait time
-- Should converge
+- X-axis: Increasing n (system size)
+- Y-axis: Average wait/queueeing time (seconds)
+- Should converge to 0
 
-### Plot 2: Average Processing Time vs. n
+### Plot 2: Average Execution Time vs. n
 
-- Should converge
+- Should converge to optimal value
 
 ### Plot 3: Average Wait and Processing Time vs. Normalized Arrival Rate
 
