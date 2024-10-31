@@ -22,10 +22,10 @@ programs = {
     5: ("Start Main Plot", run_main_plot.start_program),
     6: ("Start Plot for Distribution Heterogeneous", run_plot4dis_hetro.start_program),
     7: (
-        "Start Plot for Distribution Heterogeneous Copy",
+        "Start Plot for 4 prob distributions Heterogeneous copy",
         run_plot4dis_hetro_copy.start_program,
     ),
-    8: ("Start Probability 36", run_prob36.start_program),
+    8: ("Start cvxpy optimiser for Problem 36", run_prob36.start_program),
     9: ("Start Temporary Code Runner", run_temp_code_runner_file.start_program),
     10: ("Start Combined Heterogeneous Plot", run_combined_hetro_plot.start_program),
 }
