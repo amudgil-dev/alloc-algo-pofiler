@@ -1,4 +1,16 @@
+## Context on the project
+
+      \textbf{Unprecedented demands} are being placed on compute resources due to HPC jobs such as next-gen machine learning. Distributed systems rely on resource provisioning algorithms to parallelise these jobs across many nodes; however, traditional algorithms are unlikely to perform- an \textbf{inefficient and costly} waste of power and time.
+      \vspace{0.1cm} % Add space below the text
+
+      This research aims to \textbf{design the optimal algorithm for parallelisable tasks}, under a real-world workload, and validate theoretical expectations with the results from system simulations.
+
+**      This simulation platform is open source and is intended for researchers and hobbyists in this field to profile their own resource allocation algorithms under various workloads and traffic conditions. **
+
 # Job Market Simulation Model
+app/models/jump_model.py
+
+
 
 ## Modelling Incoming Jobs
 
@@ -16,7 +28,7 @@ In a Poisson process, interarrival times follow the exponential distribution, wh
 - 1/λ: Mean interarrival time
 - n: Number of servers
 - λ^(n): Rate of arrival per server
-- n × λ^(n): Arrival rate of jobs
+- n × λ^(n): scaled Arrival rate of jobs in the system
 
 The system model uses α and β to define how the job arrival rate for a single server λ^(n) scales with the system size n:
 
@@ -31,6 +43,12 @@ We study different traffic conditions:
 3. Sub-Halfin-Whitt regime: α ∈ (0, 1/2), β > 0
 4. Super-Halfin-Whitt regime: α ∈ (1/2, 1), β > 0
 5. Super-non-degenerate slowdown (NDS) regime: α ≥ 1
+
+and different inherant size probability distributions:
+1. Perato
+2. Mixed-Erlang
+3. Determinstic
+4. Exponential
 
 ## Speed-up Function
 

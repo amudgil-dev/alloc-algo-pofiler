@@ -12,6 +12,10 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
+"""
+class to define j job types that the simulation workload consists of
+"""
+
 
 class JobClassManager:
     def __init__(self):
